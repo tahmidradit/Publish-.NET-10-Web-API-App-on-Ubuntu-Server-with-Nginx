@@ -1,4 +1,4 @@
-# Publish .NET-10 Web API/App on Ubuntu Server with Nginx
+# Publish .NET 10 Web API/App on Ubuntu Server with Nginx
 
 ## Step 1: Install .NET 10 Runtime
 
