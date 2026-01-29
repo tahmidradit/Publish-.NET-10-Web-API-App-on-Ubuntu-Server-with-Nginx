@@ -60,7 +60,9 @@ Save and exit:
        
 Health Checks:
 > sudo systemctl status myapp.service
+
 > sudo systemctl enable myapp.service
+
 > sudo systemctl start myapp.service
 
 Step 5: Configure Nginx Reverse Proxy
