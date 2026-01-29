@@ -146,6 +146,6 @@ Step 8: Configure Firewall for public access (UFW – Uncomplicated Firewall)
 *** After any new site/api deployment/publish files change:
         > sudo systemctl restart myapp.service
 *** After any change in nginx:
-        > sudo nginx -s reload
+> sudo nginx -s reload
 
 > DONE ! Now check your site using mobile data or from a different network from your premises
