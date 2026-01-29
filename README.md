@@ -1,20 +1,20 @@
 # Publish .NET-10 Web API/App on Ubuntu with Nginx
 
-Step 1: Install .NET 10 Runtime
+## Step 1: Install .NET 10 Runtime
 
 > sudo apt-get update && \ sudo apt-get install -y aspnetcore-runtime-10.0
         
-Verify installation:
+### Verify installation:
 > dotnet --list-runtimes
         
-Step 2: Install Nginx
+##  Step 2: Install Nginx
 
 > sudo apt update -y && sudo apt install nginx
         
-Verify installation:
+### Verify installation:
 > sudo systemctl status nginx
         
-Health Checks:
+### Health Checks:
 > sudo service nginx status
 
 > sudo service nginx stop
@@ -25,17 +25,17 @@ Health Checks:
 
 > sudo nginx -t
         
-Step 3: Copy Publish Files
+## Step 3: Copy Publish Files
 
-Create publish folder
+### Create publish folder
 > sudo mkdir -p /var/www/myapp
         
-Transfer files in your ubuntu server directory using WinSCP/FileZilla
+### Transfer files in your ubuntu server directory using WinSCP/FileZilla
         
-Step 4: Create systemd Service for .NET App
+## Step 4: Create systemd Service for .NET App
 > sudo nano /etc/systemd/system/myapp.service
        
-Copy-paste Service Configuration and replace according to your own:
+### Copy-paste Service Configuration and replace according to your own:
        
        [Unit]
        Description=Your message/title
@@ -55,20 +55,20 @@ Copy-paste Service Configuration and replace according to your own:
        [Install]
        WantedBy=multi-user.target
 
-Save and exit: 
+### Save and exit: 
 > Ctrl+S, Ctrl+X
        
-Health Checks:
+### Health Checks:
 > sudo systemctl status myapp.service
 
 > sudo systemctl enable myapp.service
 
 > sudo systemctl start myapp.service
 
-Step 5: Configure Nginx Reverse Proxy
+## Step 5: Configure Nginx Reverse Proxy
 > sudo nano /etc/nginx/sites-available/myapp
 
-Copy-paste Nginx Configuration and replace according to your own:
+### Copy-paste Nginx Configuration and replace according to your own:
         
         map $http_connection $connection_upgrade {
           "Upgrade" $http_connection;
@@ -106,55 +106,55 @@ Copy-paste Nginx Configuration and replace according to your own:
           proxy_set_header X-Forwarded-Proto $scheme;
         }
       }
-Save and exit: 
+### Save and exit: 
 > Ctrl+S, Ctrl+X
      
-Step 6: Enable Site & Restart Nginx
+## Step 6: Enable Site & Restart Nginx
 
-Create Symlink
+### Create Symlink
 > sudo ln -s /etc/nginx/sites-available/myapp /etc/nginx/sites-enabled/myapp
         
-Test Nginx configuration:
+### Test Nginx configuration:
 > sudo nginx -t
 
-Health Checks:
+### Health Checks:
 > sudo service nginx status
 > sudo service nginx stop
 > sudo service nginx restart
 > sudo nginx -s reload
 > sudo service nginx status
         
-Step 7: Install SSL (HTTPS) with Let's Encrypt
+## Step 7: Install SSL (HTTPS) with Let's Encrypt
 
-Install Certbot
+### Install Certbot
 > sudo apt install certbot python3-certbot-nginx
 
-Generate and apply SSL certificates:
+### Generate and apply SSL certificates:
 > sudo certbot --nginx -d myapp.com
 > sudo certbot --nginx -d www.myapp.com
 
-Step 8: Configure Firewall for public access (UFW – Uncomplicated Firewall)
+## Step 8: Configure Firewall for public access (UFW – Uncomplicated Firewall)
 
-Install UFW:
+### Install UFW:
 > sudo apt update
 > sudo apt install ufw
 
-Allow SSH Access (CRITICAL) 
+### Allow SSH Access (CRITICAL) 
 > sudo ufw allow OpenSSH
         
-Allow Web Traffic (HTTP) 
+### Allow Web Traffic (HTTP) 
 > sudo ufw allow 80
         
-Allow Web Traffic (HTTPS) 
+### Allow Web Traffic (HTTPS) 
 > sudo ufw allow 443
         
-Nginx profiles (recommended) 
+### Nginx profiles (recommended) 
 > sudo ufw allow 'Nginx Full'
 
-*** After any publish file change:
+### After any publish file change:
 > sudo systemctl restart myapp.service
 
-*** After any change in nginx:
+### After any change in nginx:
 > sudo nginx -s reload
 
-DONE ! Now check your site using mobile data or from a different network from your premises
+## DONE ! Now check your site using mobile data or from a different network from your premises
