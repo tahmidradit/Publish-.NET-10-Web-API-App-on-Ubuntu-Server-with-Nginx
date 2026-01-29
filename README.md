@@ -80,7 +80,6 @@
         }
 
         server {
-          listen 80;
           server_name myapp.com;
 
           location / {
@@ -96,7 +95,6 @@
         }
 
       server {
-        listen 80;
         server_name www.myapp.com;
 
         location / {
