@@ -41,23 +41,23 @@
        
 ### Copy-paste Service Configuration and edit according to your own:
 
-        [Unit]
-        Description=Your message/title
-        After=network.target
+[Unit]
+Description=Your message/title
+After=network.target
        
-        [Service]
-        WorkingDirectory=/var/www/myapp
-        ExecStart=/usr/bin/dotnet /var/www/myapp/myapp.dll
-        Restart=always
-        RestartSec=10
-        KillSignal=SIGINT
-        SyslogIdentifier=dotnet-example
-        User=www-data
-        Environment=ASPNETCORE_ENVIRONMENT=Production
-        Environment=DOTNET_NOLOGO=true
+[Service]
+WorkingDirectory=/var/www/myapp
+ExecStart=/usr/bin/dotnet /var/www/myapp/myapp.dll
+Restart=always
+RestartSec=10
+KillSignal=SIGINT
+SyslogIdentifier=dotnet-example
+User=www-data
+Environment=ASPNETCORE_ENVIRONMENT=Production
+Environment=DOTNET_NOLOGO=true
 
-        [Install]
-        WantedBy=multi-user.target
+[Install]
+WantedBy=multi-user.target
 
 ### Save and exit: 
 > Ctrl+S, Ctrl+X
