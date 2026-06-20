@@ -40,24 +40,25 @@
 > sudo nano /etc/systemd/system/myapp.service
        
 ### Copy-paste Service Configuration and edit according to your own:
+<pre>
+[Unit]
+Description=Your message/title
+After=network.target
 
-[Unit]<br />
-Description=Your message/title<br />
-After=network.target<br />
-<br />
-[Service]<br />
-WorkingDirectory=/var/www/myapp<br />
-ExecStart=/usr/bin/dotnet /var/www/myapp/myapp.dll<br />
-Restart=always<br />
-RestartSec=10<br />
-KillSignal=SIGINT<br />
-SyslogIdentifier=dotnet-example<br />
-User=www-data<br />
-Environment=ASPNETCORE_ENVIRONMENT=Production<br />
-Environment=DOTNET_NOLOGO=true<br />
-<br />
-[Install]<br />
-WantedBy=multi-user.target<br />
+[Service]
+WorkingDirectory=/var/www/myapp
+ExecStart=/usr/bin/dotnet /var/www/myapp/myapp.dll
+Restart=always
+RestartSec=10
+KillSignal=SIGINT
+SyslogIdentifier=your-defined-text-like-myappname
+User=www-data
+Environment=ASPNETCORE_ENVIRONMENT=Production
+Environment=DOTNET_NOLOGO=true
+
+[Install]
+WantedBy=multi-user.target
+</pre>
 
 ### Save and exit: 
 > Ctrl+S, Ctrl+X
