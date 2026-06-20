@@ -73,25 +73,40 @@ WantedBy=multi-user.target<br />
 > sudo nano /etc/nginx/sites-available/myapp
 
 ### Copy-paste Nginx Configuration and edit according to your own:
+<pre>
+map $http_connection $connection_upgrade {
+  "Upgrade" $http_connection;
+  default keep-alive;
+}
 
-map $http_connection $connection_upgrade {<br />
-  "Upgrade" $http_connection;<br />
-  default keep-alive;<br />
-}<br />
-<br />
-server {<br />
-  server_name myapp.com;<br />
-  location / {<br />
-    proxy_pass         http://127.0.0.1:5000/;<br />
-    proxy_http_version 1.1;<br />
-    proxy_set_header   Upgrade $http_upgrade;<br />
-    proxy_set_header   Connection $connection_upgrade;<br />
-    proxy_set_header   Host $host;<br />
-    proxy_cache_bypass $http_upgrade;<br />
-    proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;<br />
-    proxy_set_header   X-Forwarded-Proto $scheme;<br />
-  &nbsp;}<br />
-}<br />
+server {
+  server_name myapp.com;
+  location / {
+    proxy_pass http://127.0.0.1:5000/;
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection $connection_upgrade;
+    proxy_set_header Host $host;
+    proxy_cache_bypass $http_upgrade;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+  }
+}
+
+server {
+  server_name www.myapp.com;
+  location / {
+    proxy_pass http://127.0.0.1:5000/;
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection $connection_upgrade;
+    proxy_set_header Host $host;
+    proxy_cache_bypass $http_upgrade;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+  }
+}
+</pre>
 
 ### Save and exit: 
 > Ctrl+S, Ctrl+X
