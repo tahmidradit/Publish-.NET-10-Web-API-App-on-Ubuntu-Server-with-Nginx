@@ -90,7 +90,7 @@ server {<br />
     proxy_cache_bypass $http_upgrade;<br />
     proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;<br />
     proxy_set_header   X-Forwarded-Proto $scheme;<br />
-  }<br />
+  &nbsp;}<br />
 }<br />
 
 ### Save and exit: 
